@@ -1,7 +1,11 @@
-# A workflow file that downloads macOS Tahoe recovery image 
+# A workflow file that generates macOS Tahoe recovery image 
 
-## Downloaded straight  from Apple (https://swcdn.apple.com/content/downloads/26/20/082-55599-A_UZPH7KLA4Q/fddo2aezqd7xchfjwh4244kwixjsut4boc/InstallAssistant.pkg) 
+### Full installer downloaded straight from Apple and then recover image is extracted 
 
+# Why you may need this ? 
+
+Without the recovery image, you need to be on macOS to install Tahoe. Since there's no stable release yet, no official recovery images are available either.
+This repo will fetch the full beta installer and zip what you need to have in order to install Tahoe from recovery. 
 
 # How to use this ?
 
@@ -9,13 +13,13 @@ Fork this repo and run `Generate macOS Tahoe Recovery Image` worflow.
 
 Once done you will have com.apple.recovery.boot.zip artifact 
 
-Unzip it and you will have BaseSystem
+Unzip it and you will have com.apple.recovery.boot
 
 Continue with https://dortania.github.io/OpenCore-Install-Guide/installer-guide/windows-install.html
 
+or if you are on Linux https://dortania.github.io/OpenCore-Install-Guide/installer-guide/linux-install.html
 
-Or you can wait for a full release by Apple so that [gibMacOS](https://github.com/corpnewt/gibMacOS) can download it
-
+you can skip the Downloading macOS part as this repo will that for you
 
 ## ⚠️ Legal Notice & Disclaimer
 ## This project does not distribute, modify, or host any Apple software.
