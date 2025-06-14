@@ -29,7 +29,7 @@ jobs:
           sudo /Applications/'Install macOS Beta'.app/Contents/Resources/createinstallmedia --volume /Volumes/Tahoe --nointeraction
           cp -R '/Volumes/Install macOS Beta/BaseSystem' /tmp/BaseSystem
 
-      - name: ZIP BaseSystem as com.apple.recovery.boot.zip
+      - name: ZIP BaseSystem as com.apple.recovery.boot
         run: |
           cd /tmp
           zip -r com.apple.recovery.boot.zip BaseSystem
