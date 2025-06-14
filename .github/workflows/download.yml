@@ -27,7 +27,7 @@ jobs:
           sudo hdiutil attach /tmp/Tahoe.dmg -noverify -mountpoint /Volumes/Tahoe
           sleep 10
           sudo /Applications/'Install macOS Beta'.app/Contents/Resources/createinstallmedia --volume /Volumes/Tahoe --nointeraction
-          cp  '/Volumes/Install macOS Beta/BaseSystem' /tmp/BaseSystem
+          cp -R '/Volumes/Install macOS Beta/BaseSystem' /tmp/BaseSystem
 
       - name: ZIP BaseSystem as com.apple.recovery.boot.zip
         run: |
