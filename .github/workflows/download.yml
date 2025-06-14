@@ -1,4 +1,4 @@
-name: Generate macOS Installer
+name: Generate macOS Tahoe Recovery Image
 
 on:
   workflow_dispatch:
