@@ -1,0 +1,41 @@
+name: Generate macOS Installer
+
+on:
+  workflow_dispatch:
+
+run-name: Generate macOS Tahoe Recovery Image
+
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+
+      - name: Download macOS Installer
+        run: |
+          curl -L -o /tmp/InstallAssistant.pkg https://swcdn.apple.com/content/downloads/26/20/082-55599-A_UZPH7KLA4Q/fddo2aezqd7xchfjwh4244kwixjsut4boc/InstallAssistant.pkg
+
+      - name: Install the assistant
+        run: |
+          sudo installer -pkg /tmp/InstallAssistant.pkg -target /
+
+      - name: Generate macOS Installer
+        run: |
+          sudo hdiutil create -o /tmp/Tahoe -size 20000m -volname 'Tahoe' -layout SPUD -fs HFS+J
+          sudo hdiutil attach /tmp/Tahoe.dmg -noverify -mountpoint /Volumes/Tahoe
+          sleep 10
+          sudo /Applications/Install macOS Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/Tahoe --nointeraction
+          cp  /Volumes/Install macOS Beta/BaseSystem /tmp/BaseSystem
+
+      - name: ZIP BaseSystem as com.apple.recovery.boot.zip
+        run: |
+          cd /tmp
+          zip -r com.apple.recovery.boot.zip BaseSystem
+
+      - name: Upload com.apple.recovery.boot.zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-Recovery-Image
+          path: /tmp/com.apple.recovery.boot.zip
