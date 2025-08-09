@@ -5,22 +5,26 @@ on:
 
 run-name: Generate macOS Tahoe Recovery Image
 
-
 jobs:
   build:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      
+
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /Library/Android
+          df -h
 
       - name: Download macOS Installer
         run: |
           curl -L -o /tmp/InstallAssistant.pkg https://swcdn.apple.com/content/downloads/26/20/082-55599-A_UZPH7KLA4Q/fddo2aezqd7xchfjwh4244kwixjsut4boc/InstallAssistant.pkg
-
       - name: Install the assistant
         run: |
           sudo installer -pkg /tmp/InstallAssistant.pkg -target /
-
       - name: Generate macOS Installer
         run: |
           sudo hdiutil create -o /tmp/Tahoe -size 20000m -volname 'Tahoe' -layout SPUD -fs HFS+J
@@ -28,7 +32,6 @@ jobs:
           sleep 10
           sudo /Applications/'Install macOS Beta'.app/Contents/Resources/createinstallmedia --volume /Volumes/Tahoe --nointeraction
           cp -R '/Volumes/Install macOS Beta/BaseSystem' /tmp/BaseSystem
-
       - name: Upload com.apple.recovery.boot
         uses: actions/upload-artifact@v4
         with:
