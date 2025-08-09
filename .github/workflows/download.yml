@@ -22,7 +22,6 @@ jobs:
           # Remove cached tools and user caches
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
           sudo rm -rf "$HOME/.cache"
-          sudo rm -rf "$HOME/Library/Caches"
           
           # Remove Xcode to free ~10–15GB
           sudo rm -rf /Applications/Xcode.app
