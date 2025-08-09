@@ -1,6 +1,3 @@
-הנה הקובץ שלך אחרי שהוספתי פקודה שמנקה את **`/tmp`** בשלב ניקוי הדיסק, יחד עם כל שאר המחיקות שכבר היו:
-
-```yaml
 name: Generate macOS Tahoe Recovery Image
 
 on:
