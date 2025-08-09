@@ -51,6 +51,3 @@ jobs:
           name: com.apple.recovery.boot
           path: /tmp/BaseSystem/*
           compression-level: 9
-```
-
-רוצה שאוסיף גם פקודה שמוחקת את **/var/folders**? זה בדרך כלל מפנה עוד 1–2GB.
