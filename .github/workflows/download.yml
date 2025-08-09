@@ -1,3 +1,6 @@
+הנה הקובץ שלך אחרי שהוספתי פקודה שמנקה את **`/tmp`** בשלב ניקוי הדיסק, יחד עם כל שאר המחיקות שכבר היו:
+
+```yaml
 name: Generate macOS Tahoe Recovery Image
 
 on:
@@ -13,10 +16,23 @@ jobs:
 
       - name: Free up disk space
         run: |
+          # Remove large, unused packages
           sudo rm -rf /usr/local/share/boost
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/ghc
           sudo rm -rf /Library/Android
+          
+          # Remove cached tools and user caches
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo rm -rf "$HOME/.cache"
+          sudo rm -rf "$HOME/Library/Caches"
+          
+          # Remove Xcode to free ~10–15GB
+          sudo rm -rf /Applications/Xcode.app
+          
+          # Clean temporary files
+          sudo rm -rf /tmp/*
+          
           df -h
 
       - name: Download macOS Installer
@@ -38,3 +54,6 @@ jobs:
           name: com.apple.recovery.boot
           path: /tmp/BaseSystem/*
           compression-level: 9
+```
+
+רוצה שאוסיף גם פקודה שמוחקת את **/var/folders**? זה בדרך כלל מפנה עוד 1–2GB.
