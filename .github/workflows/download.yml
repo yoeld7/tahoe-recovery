@@ -42,8 +42,8 @@ jobs:
           sudo hdiutil create -o /tmp/Tahoe -size 20000m -volname 'Tahoe' -layout SPUD -fs HFS+J
           sudo hdiutil attach /tmp/Tahoe.dmg -noverify -mountpoint /Volumes/Tahoe
           sleep 10
-          sudo /Applications/'Install macOS Tahoe Beta'.app/Contents/Resources/createinstallmedia --volume /Volumes/Tahoe --nointeraction
-          cp -R '/Volumes/Install macOS Tahoe Beta/BaseSystem' /tmp/BaseSystem
+          sudo /Applications/'Install macOS Tahoe'.app/Contents/Resources/createinstallmedia --volume /Volumes/Tahoe --nointeraction
+          cp -R '/Volumes/Install macOS Tahoe/BaseSystem' /tmp/BaseSystem
       - name: Upload com.apple.recovery.boot
         uses: actions/upload-artifact@v4
         with:
